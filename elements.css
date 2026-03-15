@@ -14,8 +14,8 @@
 	align-self: end;
 	padding: calc(var(--density_ds) * 0.6em);
 	gap: calc(var(--density_ds) * 1em);
-	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
-	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-right: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-bottom: 1px solid rgba(var(--space-color-RGB), 0.1);
 }
 
 .exp_box {
@@ -35,8 +35,8 @@
 	align-self: center;
 	padding: calc(var(--density_ds) * .6em);
 	gap: calc(var(--density_ds) * 1em);
-	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
-	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-right: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-bottom: 1px solid rgba(var(--space-color-RGB), 0.1);
 }
 
 .case_box {
