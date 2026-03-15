@@ -1,0 +1,11 @@
+:root {
+	--cloud-color-RGB: 255, 255, 255;
+	--graphite-color-RGB: 108, 108, 108;
+	--space-color-RGB: 10, 10, 10;
+	--citrus-color-RGB: 255, 74, 0;
+}
+
+body {
+	color: rgba(var(--space-color-RGB), .9);
+	background-color: rgba(var(--cloud-color-RGB), 1);
+}

@@ -1,0 +1,108 @@
+.hdr_box {
+	display: flex;
+	flex-direction: column;
+	align-self: start;
+	padding: calc(var(--density_ds) * 0.6em);
+	gap: calc(var(--density_ds) * 1em);
+	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+}
+
+.ftr_box {
+	display: flex;
+	flex-direction: column;
+	align-self: end;
+	padding: calc(var(--density_ds) * 0.6em);
+	gap: calc(var(--density_ds) * 1em);
+	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+}
+
+.exp_box {
+	display: flex;
+	flex-direction: column;
+	align-self: start;
+	padding: calc(var(--density_ds) * 0.6em);
+	gap: calc(var(--density_ds) * 1em);
+	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+}
+
+.do_box,
+.do_box_solo {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	padding: calc(var(--density_ds) * .6em);
+	gap: calc(var(--density_ds) * 1em);
+	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+}
+
+.case_box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+
+	& img {
+	 	width: 100%;
+	 }
+
+	& a,
+	& button {
+		position: absolute;
+		margin-bottom: calc(var(--density_ds) * 0.6em);
+	}
+
+	.btn_line {
+		align-self: center;
+	}
+}
+
+.btn_line {
+	color: rgba(var(--graphite-color-RGB));
+	background-color: rgba(var(--space-color-RGB), 0.05);
+	padding: 0 calc(var(--density_ds) * 0.15em);
+	align-self: start;
+	cursor: pointer;
+	text-decoration: none;
+	transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn_line:hover {
+	color: rgba(var(--citrus-color-RGB));
+	background-color: rgba(var(--citrus-color-RGB), 0.05);
+	transition: color 0s ease, background-color 0s ease;
+}
+
+.sec_text {
+	color: rgba(var(--graphite-color-RGB), 0.88);
+}
+
+.row_exp_do {
+	display: grid;
+	grid-template-columns: 1fr;
+    grid-template-rows: fit-content(100%) 1fr;
+}
+
+.view_case_box {
+	display: flex;
+	flex-direction: column;
+	align-self: start;
+	padding: calc(var(--density_ds) * 0.6em);
+	border-left: 1px solid rgba(var(--space-color-RGB), 0.1);
+	border-top: 1px solid rgba(var(--space-color-RGB), 0.1);
+	& img,
+	& video {
+	 	width: 100%;
+	 }
+}
+
+.row_view_case {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--density_ds) * 0.6em);
+}
