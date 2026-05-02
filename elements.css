@@ -16,8 +16,7 @@
 
 .btn-line {
 	color: rgba(var(--graphite-color-RGB));
-	background-color: rgba(var(--space-color-RGB), 0.05);
-	backdrop-filter: blur(3px);
+	background-color: rgba(var(--overcast-color-RGB));
 	padding: 0 calc(var(--density_ds) * 0.15em);
 	align-self: start;
 	cursor: pointer;
@@ -27,10 +26,10 @@
 
 .btn-line:hover {
 	color: rgba(var(--citrus-color-RGB));
-	background-color: rgba(var(--citrus-color-RGB), 0.05);
+	background-color: rgba(var(--sunset-color-RGB));
 	transition: color 0s ease, background-color 0s ease;
 }
 
 .sec-text {
-	color: rgba(var(--graphite-color-RGB), 0.88);
+	color: rgba(var(--graphite-color-RGB));
 }

@@ -1,11 +1,13 @@
 :root {
 	--cloud-color-RGB: 250, 250, 250;
-	--graphite-color-RGB: 108, 108, 108;
-	--space-color-RGB: 10, 10, 10;
+	--overcast-color-RGB: 238, 238,238;
+	--sunset-color-RGB: 250, 241, 237;
+	--graphite-color-RGB: 116, 116, 116;
+	--space-color-RGB: 34, 34, 34;
 	--citrus-color-RGB: 255, 74, 0;
 }
 
 body {
-	color: rgba(var(--space-color-RGB), .9);
-	background-color: rgba(var(--cloud-color-RGB), 1);
+	color: rgba(var(--space-color-RGB));
+	background-color: rgba(var(--cloud-color-RGB));
 }
