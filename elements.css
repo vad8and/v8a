@@ -18,6 +18,7 @@
 	color: rgba(var(--graphite-color-RGB));
 	background-color: rgba(var(--space-color-RGB), 0.05);
 	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
 	padding: 0 calc(var(--density_ds) * 0.15em);
 	align-self: start;
 	cursor: pointer;
