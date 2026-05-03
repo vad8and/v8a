@@ -72,11 +72,11 @@ body {
 }
 
 html {
-	--mobile-font-size-min: 13;
-	--mobile-font-size-max: 17;
+	--mobile-font-size-min: 12;
+	--mobile-font-size-max: 16;
 
-	--desktop-font-size-min: 11;
-	--desktop-font-size-max: 16;
+	--desktop-font-size-min: 10;
+	--desktop-font-size-max: 15;
 	
 	--mobile-viewport-min: 320;
 	--mobile-desktop-breakpoint: 768;
