@@ -3,7 +3,6 @@ Idea — zspotter (IG @zzz_desu, TW @zspotter, EX play.ertdfgcvb.xyz/#/src/contr
 Editor — Qwen 3.6-Plus
 Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
 */
-
 (function() {
   'use strict';
   if (window.__slimeBgInitialized) return;
@@ -13,8 +12,8 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   canvas.id = 'slime-bg';
   canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;background:transparent;';
   document.body.prepend(canvas);
-  const ctx = canvas.getContext('2d', { alpha: true });
 
+  const ctx = canvas.getContext('2d', { alpha: true });
   const W = 500, H = 500;
   const NUM = 1200;
   const R = W / 2;
@@ -30,6 +29,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   let smoothAlpha = new Float32Array(W * H);
   const ax = new Float32Array(NUM), ay = new Float32Array(NUM);
   const adx = new Float32Array(NUM), ady = new Float32Array(NUM);
+
   for (let i = 0; i < NUM; i++) {
     const angle = Math.random() * Math.PI * 2;
     const radius = Math.sqrt(Math.random()) * R * 0.7;
@@ -50,7 +50,6 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   let isDown = false, mx = 0.5, my = 0.5;
   let zoomTimeout = null;
   let canZoom = false;
-
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   function update() {
@@ -66,6 +65,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
 
     const cycleTime = performance.now() * 0.00007;
     const scatter = Math.sin(cycleTime) > 0.7 ? 1 : 0;
+
     for (let i = 0; i < NUM; i++) {
       const cx = ax[i], cy = ay[i];
       const dx = adx[i], dy = ady[i];
@@ -134,6 +134,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
     const t = performance.now() * 0.00015;
     ctx.fillStyle = `rgb(${CR}, ${CG}, ${CB})`;
     let count = 0;
+
     for (let y = 0; y < H; y += STEP) {
       for (let x = 0; x < W; x += STEP) {
         if (count >= MAX_DOTS) break;
@@ -141,7 +142,6 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
         const val = chem[idx];
         const wave = 0.85 + 0.15 * Math.sin(t + x * 0.004 + y * 0.004);
         const targetAlpha = val > THRESHOLD ? Math.pow(val, 0.45) * wave : 0;
-
         smoothAlpha[idx] += (targetAlpha - smoothAlpha[idx]) * 0.14;
         const alpha = smoothAlpha[idx];
 
@@ -172,6 +172,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
     view.fx = target.fx;
     view.fy = target.fy;
   }
+
   window.addEventListener('resize', resize);
   resize();
 
@@ -182,12 +183,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
     zoomTimeout = setTimeout(() => {
       if (isDown) {
         canZoom = true;
-        if (!isTouchDevice) {
-          document.body.style.userSelect = 'none';
-          document.body.style.webkitUserSelect = 'none';
-          document.body.style.mozUserSelect = 'none';
-          document.body.style.msUserSelect = 'none';
-        }
+        // Убрано document.body.style.userSelect = 'none', чтобы не блокировать выделение текста
         if (e.touches) {
           mx = e.touches[0].clientX / window.innerWidth;
           my = e.touches[0].clientY / window.innerHeight;
@@ -202,12 +198,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   function endHold() {
     isDown = false;
     canZoom = false;
-    if (!isTouchDevice) {
-      document.body.style.userSelect = '';
-      document.body.style.webkitUserSelect = '';
-      document.body.style.mozUserSelect = '';
-      document.body.style.msUserSelect = '';
-    }
+    // Убрано восстановление userSelect, так как оно больше не меняется
     if (zoomTimeout) {
       clearTimeout(zoomTimeout);
       zoomTimeout = null;
