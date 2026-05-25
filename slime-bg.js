@@ -8,13 +8,13 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   'use strict';
   if (window.__slimeBgInitialized) return;
   window.__slimeBgInitialized = true;
-  
+
   const canvas = document.createElement('canvas');
   canvas.id = 'slime-bg';
   canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;background:transparent;';
   document.body.prepend(canvas);
-  
   const ctx = canvas.getContext('2d', { alpha: true });
+
   const W = 500, H = 500;
   const NUM = 1200;
   const R = W / 2;
@@ -24,19 +24,17 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   const DEP = 0.35;
   const SENS_D = 14;
   const MIN_CHEM = 0.002;
-  
+
   let chem = new Float32Array(W * H);
   let wip = new Float32Array(W * H);
   let smoothAlpha = new Float32Array(W * H);
   const ax = new Float32Array(NUM), ay = new Float32Array(NUM);
   const adx = new Float32Array(NUM), ady = new Float32Array(NUM);
-
-  const startTime = performance.now();
-
   for (let i = 0; i < NUM; i++) {
-    ax[i] = Math.random() * W;
-    ay[i] = Math.random() * H;
     const angle = Math.random() * Math.PI * 2;
+    const radius = Math.sqrt(Math.random()) * R * 0.7;
+    ax[i] = R + radius * Math.cos(angle);
+    ay[i] = R + radius * Math.sin(angle);
     adx[i] = Math.cos(angle);
     ady[i] = Math.sin(angle);
   }
@@ -45,15 +43,16 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
   const STEP = 7;
   const MAX_DOTS = 5000;
   const THRESHOLD = 0.02;
+
   let view = { scale: 1, fx: 0.5, fy: 0.5 };
   let target = { scale: 1, fx: 0.5, fy: 0.5 };
   const EASE = 0.04;
   let isDown = false, mx = 0.5, my = 0.5;
   let zoomTimeout = null;
   let canZoom = false;
-  
+
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  
+
   function update() {
     for (let y = 1; y < H - 1; y++) {
       for (let x = 1; x < W - 1; x++) {
@@ -64,10 +63,9 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
       }
     }
     const temp = chem; chem = wip; wip = temp;
-    
+
     const cycleTime = performance.now() * 0.00007;
     const scatter = Math.sin(cycleTime) > 0.7 ? 1 : 0;
-    
     for (let i = 0; i < NUM; i++) {
       const cx = ax[i], cy = ay[i];
       const dx = adx[i], dy = ady[i];
@@ -81,11 +79,6 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
       else if (lVal > rVal) rot = TURN;
       else if (rVal > lVal) rot = -TURN;
       else if (fVal < 0) rot = Math.PI / 2;
-
-      const elapsed = performance.now() - startTime;
-      if (elapsed < 3000) {
-        rot += (Math.random() - 0.5) * 1.8;
-      }
 
       const ct = Math.cos(rot), st = Math.sin(rot);
       const ndx = dx * ct - dy * st;
@@ -148,6 +141,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
         const val = chem[idx];
         const wave = 0.85 + 0.15 * Math.sin(t + x * 0.004 + y * 0.004);
         const targetAlpha = val > THRESHOLD ? Math.pow(val, 0.45) * wave : 0;
+
         smoothAlpha[idx] += (targetAlpha - smoothAlpha[idx]) * 0.14;
         const alpha = smoothAlpha[idx];
 
@@ -178,10 +172,9 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
     view.fx = target.fx;
     view.fy = target.fy;
   }
-  
   window.addEventListener('resize', resize);
   resize();
-  
+
   function startHold(e) {
     isDown = true;
     canZoom = false;
@@ -205,7 +198,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
       }
     }, 1000);
   }
-  
+
   function endHold() {
     isDown = false;
     canZoom = false;
@@ -220,7 +213,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
       zoomTimeout = null;
     }
   }
-  
+
   window.addEventListener('mousemove', e => {
     if (isDown) {
       mx = e.clientX / window.innerWidth;
@@ -237,7 +230,7 @@ Direction — Vadim Andryukgin (IG & TG @vad8and, EM vad8and@gmail.com)
       my = e.touches[0].clientY / window.innerHeight;
     }
   }, { passive: true });
-  
+
   function loop() {
     update();
     draw();
